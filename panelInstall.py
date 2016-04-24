@@ -149,8 +149,12 @@ def main():
     display = display + ('%s :: %s\n' % (opt[0], opt[1]))
   print display
   choice = int(raw_input("Choice: "))
-  fqdn_check()
-  yum_engine(('wget',))
-  options[choice-1][2]()
+  if 1 <= choice <= (len(options) - 1):
+    fqdn_check()
+    yum_engine(('wget',))
+    options[choice-1][2]()
+  else:
+    print("Please select a valid menu option.\n\n\n")
+    main()
 
 main()
