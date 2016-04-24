@@ -138,16 +138,19 @@ def get_ip(ifname):
 
 # Main
 
-def selecter(choice):
-  func_dict = {'1': cPanel, '2': plesk, '3': LAMP, '4': wordpress}
-  return func_dict[choice]
-
 def main():
   print("Please select an option to install.\n")
-  choice = raw_input("1 :: cPanel\n2 :: plesk\n3 :: LAMP Stack\n4 :: Wordpress\n\nChoice: ")
-  func = selecter(choice)
+  options = [['cPanel', '1', cPanel], 
+             ['Plesk', '2', plesk], 
+             ['LAMP Stack', '3', LAMP], 
+             ['Wordpress', '4', wordpress]]
+  display = ''
+  for opt in options:
+    display = display + ('%s :: %s\n' % (opt[0], opt[1]))
+  print display
+  choice = int(raw_input("Choice: "))
   fqdn_check()
   yum_engine(('wget',))
-  func()
+  options[choice-1][2]()
 
 main()
