@@ -19,8 +19,13 @@ def cPanel():
 def plesk():
   url = 'http://autoinstall.plesk.com/plesk-installer'
   release = 'plesk'
-  build = ('cd /home && wget %s && sh plesk-installer --select-product-id %s --select-release-latest --installation-type Full --notify-email service@cari.net' % (url, release))
+  build = ('cd /home && wget %s && sh plesk-installer '+
+           '--select-product-id %s ' +
+           '--select-release-latest' +
+           '--installation-type Full ' +
+           '--notify-email service@cari.net' % (url, release))
   os.system(build)
+  os.system("iptables -I INPUT 2 -p tcp --dport 8443 -j ACCEPT")
 
 # LAMP Stack
 
@@ -118,6 +123,12 @@ def mysql_bash_engine(commands, auth=False, wp_pass=None):
     os.system('%s -e "%s"' % (q, command))
 
 # Networking
+
+def port_engine(service):
+  service_ports = {plesk: ['8443'], LAMP: ['80'], wordpress: ['80']}
+  if type(service) == types.FunctionType:
+    for port in service_ports[service]:
+      os.system('iptables -I INPUT -p tcp --dport %s -j ACCEPT' % (port))
 
 def get_info():
   hname = socket.gethostname()
