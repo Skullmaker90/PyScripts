@@ -55,19 +55,20 @@ def yum_engine(services):
 
 def wordpress():
   url = 'http://wordpress.org/latest.tar.gz'
+  ex_path = '/home'
   wp_pass = getpass("Please choose a password for the Wordpress MySQL user: ")
   LAMP()
-  get_wordpress(url)
+  get_wordpress(url, ex_path)
   set_database(wp_pass)
   set_config(wp_pass)
   os.system("cp -r /home/wordpress/* /var/www/html")
   yum_engine(('php-gd',))
   os.system("service httpd restart")
   
-def get_wordpress(url):
+def get_wordpress(url, ex_path):
   os.system("cd /home && wget %s" % (url))
   tar = tarfile.open('/home/latest.tar.gz')
-  tar.extractall()
+  tar.extractall(path=ex_path)
 
 def set_database(wp_pass):
   comm_list = ("CREATE DATABASE wordpress",
