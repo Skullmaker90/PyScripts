@@ -40,6 +40,7 @@ def apache():
 def mysql(root_pass):
   services = ('mysql-server',)
   yum_engine(services)
+  os.system("service mysqld start")
   mysql_secure(root_pass)
 
 def php():
