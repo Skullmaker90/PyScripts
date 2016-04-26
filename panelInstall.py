@@ -55,13 +55,13 @@ def yum_engine(services):
 def wordpress():
   url = 'http://wordpress.org/latest.tar.gz'
   wp_pass = getpass("Please choose a password for the Wordpress MySQL user: ")
-  #LAMP()
+  LAMP()
   get_wordpress(url)
   set_database(wp_pass)
   set_config(wp_pass)
-  #os.system("cp -r /home/wordpress/* /var/www/html")
-  #yum_engine(('php-gd',))
-  #os.system("service httpd restart")
+  os.system("cp -r /home/wordpress/* /var/www/html")
+  yum_engine(('php-gd',))
+  os.system("service httpd restart")
   
 def get_wordpress(url):
   os.system("cd /home && wget %s" % (url))
@@ -149,7 +149,7 @@ def main():
     display = display + ('%s :: %s\n' % (opt[0], opt[1]))
   print display
   choice = int(raw_input("Choice: "))
-  if 1 <= choice <= (len(options) - 1):
+  if 1 <= choice <= (len(options)):
     fqdn_check()
     yum_engine(('wget',))
     options[choice-1][2]()
