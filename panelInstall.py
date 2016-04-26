@@ -66,7 +66,7 @@ def wordpress():
   os.system('touch /var/www/html/.htaccess')
   with open('/var/www/html/.htaccess', 'r+') as f:
     f.write('DirectoryIndex index.php index.htm')
-  os.system('iptables -I ACCEPT 3 -p tcp --dport 80 -j ACCEPT')
+  os.system('iptables -I INPUT 3 -p tcp --dport 80 -j ACCEPT')
   os.system("service httpd restart")
   
 def get_wordpress(url, ex_path):
