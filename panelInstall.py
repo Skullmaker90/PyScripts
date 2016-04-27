@@ -19,11 +19,11 @@ def cPanel():
 def plesk():
   url = 'http://autoinstall.plesk.com/plesk-installer'
   release = 'plesk'
-  build = ('cd /home && wget %s && sh plesk-installer '+
-           '--select-product-id %s ' +
+  build = ('cd /home && wget %s && sh plesk-installer ' % (url) +
+           '--select-product-id %s ' % (release) +
            '--select-release-latest' +
            '--installation-type Full ' +
-           '--notify-email service@cari.net' % (url, release))
+           '--notify-email service@cari.net')
   os.system(build)
   os.system("iptables -I INPUT 2 -p tcp --dport 8443 -j ACCEPT")
 
