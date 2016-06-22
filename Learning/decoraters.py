@@ -4,6 +4,7 @@
 
 # Can be used for curency:
 
+
 # US Dollar
 def usd(func):
     def wrap(n):
