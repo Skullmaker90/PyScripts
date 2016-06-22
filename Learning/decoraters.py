@@ -4,7 +4,6 @@
 
 # Can be used for curency:
 
-
 # US Dollar
 def usd(func):
     def wrap(n):
@@ -25,7 +24,7 @@ def jpy(func):
         return '¥{n:,}'.format(n=n)
     return wrap
 
-# Now we define our number function.
+# Now we define a number function for each decorator we've created. Like so:
 
 
 @usd
@@ -43,7 +42,7 @@ def numjpy(n):
     return n
 
 
-# Although programming is supposed to be all about efficenct and writing out
+# Although, programming is supposed to be all about efficency and writing out
 # the same code 20+ times for all the different currency's can be a hassle. We
 # can fix the situation by writing one all inclusive decorator. Like so:
 
@@ -58,7 +57,7 @@ def cur(currency):
 
 cd = {'usd': '$', 'eur': '€', 'jpy': '¥'}
 
-# Now adding any currency decorator is super easy.
+# Now adding any currency decorator is super easy and efficient!
 
 
 @cur(cd['usd'])
