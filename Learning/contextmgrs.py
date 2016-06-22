@@ -7,7 +7,9 @@
 # First we define our method we want as a class:
 class context(object):
 
-    # We have to define an init method, creating a variable for use later
+    # We have to define an init method, I've created a variable so as we can
+    # see the exit method is working with input and I've also defined a list
+    # and a dict variable so as we can force an exception.
     def __init__(self):
         self.var = None
         self.edict = {}
